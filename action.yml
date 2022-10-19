@@ -1,12 +1,14 @@
 ---
-name: 'Super-Linter'
-author: 'GitHub'
-description: 'It is a simple combination of various linters, written in bash, to help validate your source code.'
-runs:
-  using: 'docker'
-  image: 'docker://ghcr.io/github/super-linter:v4.9.7'
-branding:
-  icon: 'check-square'
-  color: 'white'
-# You can view https://github.com/github/super-linter#environment-variables
-# to see a comprehensive list of all environment variables that can be passed
+name: Validate-YAML
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  validate-yaml:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Validate YAML file
+        run: yamllint .
